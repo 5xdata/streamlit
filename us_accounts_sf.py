@@ -26,11 +26,13 @@ rows = run_query("SELECT billing_address, billing_latitude, billing_longitude, s
 
 # Print results.
 st.title('Raw Data')
-df = []
-# Print results.
-for row in rows:
-    df[0] = st.write(f"{row[0]}")
-    df[1] = st.write(f"{row[1]}")                 
+def load_data():
+    return pd.DataFrame(
+        {
+            "first column": rows[0],
+            "second column": rows[1],
+        }
+    )               
 
 st.title('US Accounts')
 
