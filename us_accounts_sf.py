@@ -29,8 +29,8 @@ st.title('Raw Data')
 df = []
 # Print results.
 for row in rows:
-    df[0] = row[0] 
-    df[1] = row[1]
+    df[0] = st.write(f"{row[0]}")
+    df[1] = st.write(f"{row[1]}")                 
 
 st.title('US Accounts')
 
