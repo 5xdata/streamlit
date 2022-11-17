@@ -26,14 +26,14 @@ rows = run_query("SELECT billing_address, billing_latitude, billing_longitude, s
 
 # Print results.
 st.title('Raw Data')
-def load_data():
+def load_data1():
     return pd.DataFrame(
         {
             "first column": rows[0],
             "second column": rows[1],
         }
     )               
-
+st.write(load_data())
 st.title('US Accounts')
 
 acv_data = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTUgpBzoRCnUYYA85IKII2TwgLHsPAlKoLvZ5LByqP5hSCPNzkMZYH2wVdKezUPXdmdpdU3FKF1hAtC/pub?gid=0&single=true&output=csv'
