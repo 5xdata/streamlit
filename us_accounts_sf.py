@@ -68,8 +68,8 @@ scatterLayer = pdk.Layer(
     )
 
 toolTip = {
-    "html": "<b>Account - My Wevideo Account</b><br><b>Billing Address - {billing_address}</b><br><b>Active ACV - {active_acv}</b>",
-    "style": {"background": "grey", "color": "white", "font-family": '"Helvetica Neue", Arial', "z-index": "10000", "max-width": "25%"},
+    "html": "<b>City State Zip - {city_state_zip}</b><br><b>Active ACV - {active_acv}</b>",
+    "style": {"background": "grey", "color": "white", "font-family": '"Helvetica Neue", Arial', "z-index": "10000", "max-width": "30%"},
 }
 
 st.pydeck_chart(pdk.Deck(
