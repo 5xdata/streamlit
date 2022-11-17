@@ -26,7 +26,11 @@ rows = run_query("SELECT billing_address, billing_latitude, billing_longitude, s
 
 # Print results.
 st.title('Raw Data')
-st.write(rows)
+df = []
+# Print results.
+for row in rows:
+    df[0] = row[0] 
+    df[1] = row[1]
 
 st.title('US Accounts')
 
