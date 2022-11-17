@@ -33,7 +33,8 @@ def load_data1():
             "second column": rows[1],
         }
     )               
-st.write(load_data())
+data1 = load_data1()
+st.write(data1)
 st.title('US Accounts')
 
 acv_data = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTUgpBzoRCnUYYA85IKII2TwgLHsPAlKoLvZ5LByqP5hSCPNzkMZYH2wVdKezUPXdmdpdU3FKF1hAtC/pub?gid=0&single=true&output=csv'
