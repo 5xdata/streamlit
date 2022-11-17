@@ -25,8 +25,7 @@ def run_query(query):
 rows = run_query("SELECT billing_address, billing_latitude, billing_longitude, sum(acv) as active_acv from wevideo_analytics.salesforce.active_acv where billing_latitude is not null and billing_longitude is not null and date = last_day(current_date) group by 1,2,3 order by 4 desc ;")
 
 # Print results.
-for row in rows:
-    st.write(f"{row[0]} has a :{row[1]}:")
+print(rows)
 
 st.title('US Accounts')
 
