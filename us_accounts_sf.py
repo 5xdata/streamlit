@@ -24,17 +24,17 @@ def run_query(query):
 
 rows = run_query("SELECT billing_address, billing_latitude, billing_longitude, sum(acv) as active_acv from wevideo_analytics.salesforce.active_acv where billing_latitude is not null and billing_longitude is not null and date = last_day(current_date) group by 1,2,3 order by 4 desc ;")
 
+st.title('US Accounts')
 # Print results.
 
 @st.cache
-data_load_state = st.text('Loading data...')
 def load_data():
     return pd.DataFrame(rows, columns=['billing_address','billing_latitude','billing_longitude','active_acv'])
+
+data_load_state = st.text('Loading data...')
 data = load_data()
 data_load_state.text("Data refreshed and loaded !!")
 
-
-st.title('US Accounts')
 
 if st.checkbox('Show raw data'):
     st.subheader('Raw data')
