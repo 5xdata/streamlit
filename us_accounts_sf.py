@@ -27,7 +27,7 @@ rows = run_query("SELECT billing_address, billing_latitude, billing_longitude, s
 # Print results.
 st.title('Raw Data')
 def load_data1():
-    return pd.DataFrame(rows)
+    return pd.DataFrame(rows, columns=['billing_address','billing_latitude','billing_longitude','active_acv')
                   
 data1 = load_data1()
 st.write(data1)
