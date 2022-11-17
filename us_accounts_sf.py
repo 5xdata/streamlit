@@ -29,7 +29,7 @@ st.title('US Accounts')
 
 @st.cache
 def load_data():
-    return pd.DataFrame(rows, columns=['billing_address','billing_latitude','billing_longitude','active_acv'])
+    return pd.DataFrame(rows, columns=['billing_address','lat','lon','active_acv'])
 
 data_load_state = st.text('Loading data...')
 data = load_data()
