@@ -22,14 +22,14 @@ def run_query(query):
         cur.execute(query)
         return cur.fetchall()
 
-rows = run_query("SELECT billing_address, billing_latitude, billing_longitude, sum(acv) as active_acv from wevideo_analytics.salesforce.active_acv where billing_latitude is not null and billing_longitude is not null and date = last_day(current_date) group by 1,2,3 order by 4 desc ;")
+rows = run_query("SELECT concat(split_part(billing_address,',',3)||','||split_part(billing_address,',',4)||','||split_part(billing_address,',',-1)), billing_latitude, billing_longitude, sum(acv) as active_acv from wevideo_analytics.salesforce.active_acv where billing_latitude is not null and billing_longitude is not null and date = last_day(current_date) group by 1,2,3 order by 4 desc ;")
 
 st.title('US Accounts')
 # Print results.
 
 @st.cache
 def load_data():
-    return pd.DataFrame(rows, columns=['billing_address','lat','lon','active_acv'])
+    return pd.DataFrame(rows, columns=['city_state_zip','lat','lon','active_acv'])
 
 data_load_state = st.text('Loading data...')
 data = load_data()
@@ -67,17 +67,6 @@ scatterLayer = pdk.Layer(
     get_line_color=[0, 0, 0],
     )
 
-hexLayer = pdk.Layer(
-    'HexagonLayer',
-    data=data,
-    get_position='[lon, lat]',
-    radius='[active_acv]',
-    elevation_scale=4,
-    elevation_range=[0, 10000],
-    pickable=True,
-    extruded=True,
-    )
-        
 toolTip = {
     "html": "<b>Account - My Wevideo Account</b><br><b>Billing Address - {billing_address}</b><br><b>Active ACV - {active_acv}</b>",
     "style": {"background": "grey", "color": "white", "font-family": '"Helvetica Neue", Arial', "z-index": "10000", "max-width": "25%"},
@@ -86,6 +75,6 @@ toolTip = {
 st.pydeck_chart(pdk.Deck(
     map_style=None,
     initial_view_state=viewState,
-    layers=[hexLayer, scatterLayer],
+    layers=[scatterLayer],
     tooltip= toolTip
     ))
