@@ -25,25 +25,16 @@ def run_query(query):
 rows = run_query("SELECT billing_address, billing_latitude, billing_longitude, sum(acv) as active_acv from wevideo_analytics.salesforce.active_acv where billing_latitude is not null and billing_longitude is not null and date = last_day(current_date) group by 1,2,3 order by 4 desc ;")
 
 # Print results.
-st.title('Raw Data')
-def load_data1():
-    return pd.DataFrame(rows, columns=['billing_address','billing_latitude','billing_longitude','active_acv'])
-                  
-data1 = load_data1()
-st.write(data1)
-st.title('US Accounts')
-
-acv_data = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTUgpBzoRCnUYYA85IKII2TwgLHsPAlKoLvZ5LByqP5hSCPNzkMZYH2wVdKezUPXdmdpdU3FKF1hAtC/pub?gid=0&single=true&output=csv'
 
 @st.cache
-def load_data():
-    data = pd.read_csv(acv_data)
-    data.rename(columns = {'billing_latitude':'lat', 'billing_longitude':'lon'}, inplace = True)
-    return data
-
 data_load_state = st.text('Loading data...')
+def load_data():
+    return pd.DataFrame(rows, columns=['billing_address','billing_latitude','billing_longitude','active_acv'])
 data = load_data()
-data_load_state.text("Done by Naveen!!")
+data_load_state.text("Data refreshed and loaded !!")
+
+
+st.title('US Accounts')
 
 if st.checkbox('Show raw data'):
     st.subheader('Raw data')
@@ -54,10 +45,10 @@ st.subheader('Map of all US Accounts of WeVideo with active ACV')
 viewState = pdk.ViewState(
     longitude=-112.8591427000004, latitude=36.365390013524475, zoom=3.50, bearing=0, pitch=0
 )
-mapStyle = 'mapbox://styles/wevideo/claavllul000m14qw11d227ne'
+#mapStyle = 'mapbox://styles/wevideo/claavllul000m14qw11d227ne'
 
-acv_to_filter = st.slider('active_acv', 0, 20000, 1000)
-filtered_data = data[data['active_acv'] == acv_to_filter]
+#acv_to_filter = st.slider('active_acv', 0, 20000, 1000)
+#filtered_data = data[data['active_acv'] == acv_to_filter]
 
 scatterLayer = pdk.Layer(
     'ScatterplotLayer',      
