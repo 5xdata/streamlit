@@ -52,7 +52,7 @@ viewState = pdk.ViewState(
 
 scatterLayer = pdk.Layer(
     'ScatterplotLayer',      
-    filtered_data,
+    data,
     get_position='[lon, lat]',
     pickable=True,
     opacity=0.2,
@@ -69,7 +69,7 @@ scatterLayer = pdk.Layer(
 
 hexLayer = pdk.Layer(
     'HexagonLayer',
-    data=filtered_data,
+    data=data,
     get_position='[lon, lat]',
     radius='[active_acv]',
     elevation_scale=4,
