@@ -59,6 +59,10 @@ state = st.multiselect(
     'Choose the states that you want to filter'
     ,sorted(set(data['state'].str.lower())))
 
+acv_range = st.radio(
+    'Choose the acv range'
+    ,('< $500', '$500 - $3k', '$3k - $10k', '> $10k'))
+
 filtered_data = data.loc[data['state'].str.lower().isin(state)]
 if filtered_data.empty:
     filtered_data = data
