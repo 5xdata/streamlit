@@ -24,8 +24,10 @@ def run_query(query):
 
 rows = run_query("SELECT substr(account_name,1,3) as account_name, split_part(billing_address,',',3) as city, split_part(billing_address,',',4) as state, split_part(billing_address,',',-1) as zip, billing_latitude, billing_longitude, sum(acv) as active_acv from wevideo_analytics.salesforce.active_acv where billing_latitude is not null and billing_longitude is not null and date = last_day(current_date) group by 1,2,3,4,5,6 order by 7 desc ;")
 
+#Title for the app
 st.title('US Accounts')
 
+#Function to load the query result into a python dataframe
 @st.cache
 def load_data():
     return pd.DataFrame(rows, columns=['account_name','city','state','zip','lat','lon','active_acv'])
@@ -34,6 +36,7 @@ data_load_state = st.text('Loading data...')
 data = load_data()
 data_load_state.text("Data refreshed and loaded !!")
 
+#Defining the filters for the app
 st.subheader('Map of all US Accounts of WeVideo with active ACV')
 
 if st.checkbox('Show Filters'):
@@ -101,7 +104,8 @@ elif st.checkbox('Show Raw Data'):
     
 else:
     filtered_data = data
-    
+
+#Defining the items required for the map chart    
 scatterLayer = pdk.Layer(
     'ScatterplotLayer',      
     filtered_data,
@@ -129,6 +133,7 @@ toolTip = {
     "style": {"background": "grey", "color": "white", "font-family": '"Helvetica Neue", Arial', "z-index": "10000", "max-width": "30%"},
 }
 
+#Map chart code
 st.pydeck_chart(pdk.Deck(
     map_style=None,
     initial_view_state=viewState,
