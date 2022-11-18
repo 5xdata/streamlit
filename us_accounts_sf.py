@@ -88,6 +88,7 @@ st.write('fiiltered_data is',filtered_data)
 st.write('filtered is',filtered)
 st.write('state', sorted(set(filtered_data['state'].str.lower())))
 st.write(filtered_data['state'])
+st.write('lower is',filtered_data['state'].str.lower())
 
 scatterLayer = pdk.Layer(
     'ScatterplotLayer',      
