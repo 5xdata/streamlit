@@ -54,12 +54,15 @@ viewState = pdk.ViewState(
 city = st.multiselect(
     'Choose the cities that you want to filter'
     ,sorted(set(data['city'].str.lower())))
-st.write('You selected:', city)
 
 state = st.multiselect(
     'Choose the states that you want to filter'
     ,sorted(set(data['state'].str.lower())))
-st.write('You selected:', state)
+
+filtered_data = data[data['city']==city]
+filtered_data = data[data['state']==state]
+st.dataframe(filtered_data, use_container_width=st.session_state.use_container_width)
+
 
 scatterLayer = pdk.Layer(
     'ScatterplotLayer',      
