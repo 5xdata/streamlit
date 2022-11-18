@@ -101,10 +101,7 @@ converted_list = [str(element) for element in city]
 city_filter = ",".join(converted_list)
 filtered_data = pd.DataFrame(filtered, columns=['account_name','city','state','zip','lat','lon','active_acv'])  
 
-st.write("Total WeVideo Accounts with Active ACV",acv_filter) 
-st.write("Total WeVideo Accounts in States",state_filter) 
-st.write("Total WeVideo Accounts in Cities",city_filter) 
-
+st.write("Total WeVideo Accounts with Active ACV",acv_filter,", in State(s)",state_filter"and in City(s)",city_filter,"is (are)",len(filtered_data)) 
 st.dataframe(filtered_data, use_container_width = True)
 scatterLayer = pdk.Layer(
     'ScatterplotLayer',      
