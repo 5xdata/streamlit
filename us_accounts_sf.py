@@ -51,6 +51,11 @@ viewState = pdk.ViewState(
 #acv_to_filter = st.slider('active_acv', 0, 20000, 1000)
 #filtered_data = data[data['active_acv'] == acv_to_filter]
 
+city = st.multiselect(
+    'Choose the cities that you want to filter',
+    ,data['city'])
+st.write('You selected:', city)
+
 scatterLayer = pdk.Layer(
     'ScatterplotLayer',      
     data,
