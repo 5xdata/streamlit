@@ -59,9 +59,16 @@ state = st.multiselect(
     'Choose the states that you want to filter'
     ,sorted(set(data['state'].str.lower())))
 
-city_filtered_data = data.loc[data['city'].str.lower().isin(city)]
-city_filtered_df = pd.DataFrame(city_filtered_data)
-filtered_data = city_filtered_df.loc[city_filtered_df['state'].str.lower().isin(state)]
+city_filtered_df = data.loc[data['city'].str.lower().isin(city)]
+def load_city_data():
+    return pd.DataFrame(city_filtered_df, columns=['account_name','city','state','zip','lat','lon','active_acv'])
+city_filtered_data = load_city_data()
+
+filtered_df = city_filtered_data.loc[city_filtered_data['state'].str.lower().isin(state)]
+def load_state_data():
+    return pd.DataFrame(filtered_df, columns=['account_name','city','state','zip','lat','lon','active_acv'])
+filtered_data = load_state_data()
+
 st.dataframe(filtered_data, use_container_width = True)
 
 
