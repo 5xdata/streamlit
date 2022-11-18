@@ -56,6 +56,11 @@ city = st.multiselect(
     ,sorted(set(data['city'].str.lower())))
 st.write('You selected:', city)
 
+state = st.multiselect(
+    'Choose the states that you want to filter'
+    ,sorted(set(data['state'].str.lower())))
+st.write('You selected:', state)
+
 scatterLayer = pdk.Layer(
     'ScatterplotLayer',      
     data,
