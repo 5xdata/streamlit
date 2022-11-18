@@ -54,14 +54,19 @@ acv_range = st.radio(
 
 if acv_range == '< $500':
     filtered_data = data.loc[(data['active_acv'] > 0) & (data['active_acv'] < 500)]
+    acv_filter = '< $500'
 elif acv_range =='$500 - $3k':
     filtered_data = data.loc[(data['active_acv'] >=500) & (data['active_acv'] < 3000)]
+    acv_filter = '$500 - $3k'
 elif acv_range == '$3k - $10k':
     filtered_data = data.loc[(data['active_acv'] >= 3000) & (data['active_acv'] < 10000)]
+    acv_filter = '$3k - $10k'
 elif acv_range == '> $10k':
     filtered_data = data.loc[(data['active_acv'] >= 10000)]
+    acv_filter = '$3k - $10k'
 else:
     filtered_data = data
+    acv_filter = 'of any value'
 
 filtered_data = pd.DataFrame(filtered_data, columns=['account_name','city','state','zip','lat','lon','active_acv'])   
 
@@ -73,8 +78,11 @@ state = st.multiselect(
 dummy = filtered_data.loc[filtered_data['state'].str.lower().isin(state)]  
 if dummy.empty:
     filtered = filtered_data
+    state_filter = 'any state'
 else:
     filtered = dummy
+    converted_list = [str(element) for element in dummy.to_list()]
+    state_filter = ",".join(converted_list)
 filtered_data = pd.DataFrame(filtered, columns=['account_name','city','state','zip','lat','lon','active_acv'])  
 
 city = st.multiselect(
@@ -84,9 +92,16 @@ city = st.multiselect(
 dummy = filtered_data.loc[filtered_data['city'].str.lower().isin(city)]  
 if dummy.empty:
     filtered = filtered_data
+    city_filter = 'any city'
 else:
     filtered = dummy
+    converted_list = [str(element) for element in dummy.to_list()]
+    city_filter = ",".join(converted_list)
 filtered_data = pd.DataFrame(filtered, columns=['account_name','city','state','zip','lat','lon','active_acv'])  
+
+st.write("Total WeVideo Accounts with Active ACV",acv_filter) 
+st.write("Total WeVideo Accounts in States",state_filter) 
+st.write("Total WeVideo Accounts in Cities",city_filter) 
 
 st.dataframe(filtered_data, use_container_width = True)
 scatterLayer = pdk.Layer(
