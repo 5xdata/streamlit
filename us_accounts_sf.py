@@ -59,15 +59,15 @@ state = st.multiselect(
     'Choose the states that you want to filter'
     ,sorted(set(data['state']))) #.str.lower())))
 
-filtered_data = data[data[['city','state']].isin([city,state]).any(axis=1)]
-    #dataframe1=dataframe[dataframe[['Subject', 'Semester']].isin(["SDA", '7th']).any(axis=1)]
-#filtered_data = data.loc[data['state'].str.lower().isin(state)]
+#filtered_data = data[data[['city','state']].isin([city,state]).any(axis=1)]
+
+filtered_data = data.loc[data['state'].str.lower().isin(state)]
 st.dataframe(filtered_data, use_container_width = True)
 
 
 scatterLayer = pdk.Layer(
     'ScatterplotLayer',      
-    data,
+    filtered_data,
     get_position='[lon, lat]',
     pickable=True,
     opacity=0.2,
