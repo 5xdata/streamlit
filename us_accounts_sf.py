@@ -57,7 +57,7 @@ city = st.multiselect(
 
 state = st.multiselect(
     'Choose the states that you want to filter'
-    ,sorted(set(data['state']))) #.str.lower())))
+    ,sorted(set(data['state'].str.lower())))
 
 #filtered_data = data[data[['city','state']].isin([city,state]).any(axis=1)]
 
