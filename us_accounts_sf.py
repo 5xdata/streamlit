@@ -59,7 +59,7 @@ state = st.multiselect(
     'Choose the states that you want to filter'
     ,sorted(set(data['state'].str.lower())))
 
-filtered_data = data.loc[data['city'].isin(city)]
+filtered_data = data.loc[data['city'].str.lower().isin(city)]
 #filtered_data = data[data['state']==state]
 st.dataframe(filtered_data)
 
