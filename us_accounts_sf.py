@@ -72,6 +72,7 @@ state = st.multiselect(
     ,sorted(set(filtered_data['state'].str.lower())))
 
 filtered_data = pd.DataFrame(filtered_data, columns=['account_name','city','state','zip','lat','lon','active_acv'])  
+'''
 if filtered_data.empty:
     filtered_data = data
 else:
@@ -88,7 +89,7 @@ if filtered_data.empty:
 else:
     filtered_data = filtered_data.loc[filtered_data['city'].str.lower().isin(city)]  
     filtered_data = pd.DataFrame(filtered_data, columns=['account_name','city','state','zip','lat','lon','active_acv'])  
-
+'''
 scatterLayer = pdk.Layer(
     'ScatterplotLayer',      
     filtered_data,
