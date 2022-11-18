@@ -71,8 +71,12 @@ state = st.multiselect(
     'Choose the states that you want to filter'
     ,sorted(set(filtered_data['state'].str.lower())))
 
-filtered_data = filtered_data.loc[filtered_data['state'].str.lower().isin(state)]  
-filtered_data = pd.DataFrame(filtered_data, columns=['account_name','city','state','zip','lat','lon','active_acv'])  
+test = filtered_data.loc[filtered_data['state'].str.lower().isin(state)]  
+if test.empty:
+    filtered = filtered_data
+else:
+    filtered = test
+filtered_data = pd.DataFrame(filtered, columns=['account_name','city','state','zip','lat','lon','active_acv'])  
 '''
 if filtered_data.empty:
     filtered_data = data
