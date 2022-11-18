@@ -49,7 +49,7 @@ viewState = pdk.ViewState(
 
 acv_range = st.radio(
     'Choose the acv range'
-    ,('< $500', '$500 - $3k', '$3k - $10k', '> $10k'))
+    ,('< $500', '$500 - $3k', '$3k - $10k', '> $10k','All Accounts'))
 
 
 if acv_range == '< $500':
@@ -64,31 +64,31 @@ else:
     filtered_data = data
 
 filtered_data = pd.DataFrame(filtered_data, columns=['account_name','city','state','zip','lat','lon','active_acv'])   
-#st.dataframe(filtered_data, use_container_width = True)
 
 
 state = st.multiselect(
     'Choose the states that you want to filter'
     ,sorted(set(filtered_data['state'].str.lower())))
 
-test = filtered_data.loc[filtered_data['state'].str.lower().isin(state)]  
-if test.empty:
+dummy = filtered_data.loc[filtered_data['state'].str.lower().isin(state)]  
+if dummy.empty:
     filtered = filtered_data
 else:
-    filtered = test
+    filtered = dummy
 filtered_data = pd.DataFrame(filtered, columns=['account_name','city','state','zip','lat','lon','active_acv'])  
 
 city = st.multiselect(
     'Choose the cities that you want to filter'
     ,sorted(set(filtered_data['city'].str.lower())))
 
-test = filtered_data.loc[filtered_data['city'].str.lower().isin(city)]  
-if test.empty:
+dummy = filtered_data.loc[filtered_data['city'].str.lower().isin(city)]  
+if dummy.empty:
     filtered = filtered_data
 else:
-    filtered = test
+    filtered = dummy
 filtered_data = pd.DataFrame(filtered, columns=['account_name','city','state','zip','lat','lon','active_acv'])  
 
+st.dataframe(filtered_data, use_container_width = True)
 scatterLayer = pdk.Layer(
     'ScatterplotLayer',      
     filtered_data,
