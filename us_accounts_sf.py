@@ -25,7 +25,6 @@ def run_query(query):
 rows = run_query("SELECT substr(account_name,1,3) as account_name, split_part(billing_address,',',3) as city, split_part(billing_address,',',4) as state, split_part(billing_address,',',-1) as zip, billing_latitude, billing_longitude, sum(acv) as active_acv from wevideo_analytics.salesforce.active_acv where billing_latitude is not null and billing_longitude is not null and date = last_day(current_date) group by 1,2,3,4,5,6 order by 7 desc ;")
 
 st.title('US Accounts')
-# Print results.
 
 @st.cache
 def load_data():
@@ -46,20 +45,6 @@ st.subheader('Map of all US Accounts of WeVideo with active ACV')
 viewState = pdk.ViewState(
     longitude=-112.8591427000004, latitude=36.365390013524475, zoom=3.50, bearing=0, pitch=0
 )
-#mapStyle = 'mapbox://styles/wevideo/claavllul000m14qw11d227ne'
-
-#acv_to_filter = st.slider('active_acv', 0, 20000, 1000)
-#filtered_data = data[data['active_acv'] == acv_to_filter]
-
-city = st.multiselect(
-    'Choose the cities that you want to filter'
-    ,sorted(set(data['city']))) #.str.lower())))
-
-state = st.multiselect(
-    'Choose the states that you want to filter'
-    ,sorted(set(data['state'].str.lower())))
-
-filtered_data = data.loc[data['state'].str.lower().isin(state)]
 
 acv_range = st.radio(
     'Choose the acv range'
@@ -75,26 +60,28 @@ elif acv_range == '> $10k':
     filtered_data = data.loc[(data['active_acv'] >= 10000)]
 else:
     filtered_data = data
-st.dataframe(filtered_data, use_container_width = True)
- 
+
 filtered_data = pd.DataFrame(filtered_data, columns=['account_name','city','state','zip','lat','lon','active_acv'])   
-st.write('ne',filtered_data)    
+st.dataframe(filtered_data, use_container_width = True)
+
+
 state = st.multiselect(
     'Choose the states that you want to filter'
     ,sorted(set(filtered_data['state'].str.lower())))
 
-filtered = filtered_data.loc[filtered_data['state'].str.lower().isin(state)]    
-    
-#filtered = filtered_data[filtered_data[['city','state']].isin([city,state]).any(axis=1)]
-#st.write('fiiltered_data is',filtered_data)
-#st.write('filtered is',filtered)
-#st.write('state', sorted(set(filtered_data['state'].str.lower())))
-#st.write(filtered_data['state'])
-#st.write('lower is',filtered_data['state'].str.lower())
+filtered_data = filtered_data.loc[filtered_data['state'].str.lower().isin(state)]  
+filtered_data = pd.DataFrame(filtered_data, columns=['account_name','city','state','zip','lat','lon','active_acv'])   
+
+city = st.multiselect(
+    'Choose the cities that you want to filter'
+    ,sorted(set(filtered_data['city'].str.lower())))
+
+filtered_data = filtered_data.loc[filtered_data['city'].str.lower().isin(city)]  
+filtered_data = pd.DataFrame(filtered_data, columns=['account_name','city','state','zip','lat','lon','active_acv'])   
 
 scatterLayer = pdk.Layer(
     'ScatterplotLayer',      
-    filtered,
+    filtered_data,
     get_position='[lon, lat]',
     pickable=True,
     opacity=0.2,
