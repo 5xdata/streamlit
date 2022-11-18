@@ -38,7 +38,8 @@ data_load_state.text("Data refreshed and loaded !!")
 
 if st.checkbox('Show raw data'):
     st.subheader('Raw data')
-    st.write(data)
+    st.checkbox("Full Screen", value=False, key="use_container_width")
+    st.dataframe(data, use_container_width=st.session_state.use_container_width)
     
 st.subheader('Map of all US Accounts of WeVideo with active ACV')
 
