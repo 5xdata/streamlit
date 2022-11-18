@@ -81,9 +81,9 @@ if dummy.empty:
     state_filter = 'any state'
 else:
     filtered = dummy
-    
-converted_list = [str(element) for element in state]
-state_filter = ",".join(converted_list)
+    converted_list = [str(element) for element in state]
+    state_filter = ",".join(converted_list)
+
 filtered_data = pd.DataFrame(filtered, columns=['account_name','city','state','zip','lat','lon','active_acv'])  
 
 city = st.multiselect(
@@ -96,9 +96,9 @@ if dummy.empty:
     city_filter = 'any city'
 else:
     filtered = dummy
-    
-converted_list = [str(element) for element in city]
-city_filter = ",".join(converted_list)
+    converted_list = [str(element) for element in city]
+    city_filter = ",".join(converted_list)
+
 filtered_data = pd.DataFrame(filtered, columns=['account_name','city','state','zip','lat','lon','active_acv'])  
 
 st.write("Total WeVideo Accounts with Active ACV",acv_filter,", in State(s)",state_filter,"and in City(s)",city_filter,"is (are)",len(filtered_data)) 
