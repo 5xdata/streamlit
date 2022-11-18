@@ -59,15 +59,23 @@ state = st.multiselect(
     'Choose the states that you want to filter'
     ,sorted(set(data['state'].str.lower())))
 
+filtered_data = data.loc[data['state'].str.lower().isin(state)]
+
 acv_range = st.radio(
     'Choose the acv range'
     ,('< $500', '$500 - $3k', '$3k - $10k', '> $10k'))
 
-filtered_data = data.loc[data['state'].str.lower().isin(state)]
-if filtered_data.empty:
-    filtered_data = data
+if acv_range == '< $500':
+    filtered_data = data.loc[(data['active_acv'] > 0) & (data['active_acv'] < 500)]
+elif acv_range =='$500 - $3k':
+    filtered_data = data.loc[(data['active_acv'] >=500) & (data['active_acv'] < 3000)]
+elif acv_range == '$3k - $10k':
+    filtered_data = data.loc[(data['active_acv'] >= 3000) & (data['active_acv'] < 10000)]
+elif acv_range == '> $10k':
+    filtered_data = data.loc[(data['active_acv'] >= 10000)]
 else:
-    st.dataframe(filtered_data, use_container_width = True)
+    filtered_data = data
+st.dataframe(filtered_data, use_container_width = True)
  
 #filtered_data = data[data[['city','state']].isin([city,state]).any(axis=1)]
 
