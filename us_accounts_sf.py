@@ -76,7 +76,7 @@ if filtered_data.empty:
     filtered_data = data
 else:
     filtered_data = filtered_data.loc[filtered_data['state'].str.lower().isin(state)]  
-filtered_data = pd.DataFrame(filtered_data, columns=['account_name','city','state','zip','lat','lon','active_acv'])   
+    filtered_data = pd.DataFrame(filtered_data, columns=['account_name','city','state','zip','lat','lon','active_acv'])   
 
 city = st.multiselect(
     'Choose the cities that you want to filter'
@@ -87,7 +87,7 @@ if filtered_data.empty:
     filtered_data = data
 else:
     filtered_data = filtered_data.loc[filtered_data['city'].str.lower().isin(city)]  
-filtered_data = pd.DataFrame(filtered_data, columns=['account_name','city','state','zip','lat','lon','active_acv'])  
+    filtered_data = pd.DataFrame(filtered_data, columns=['account_name','city','state','zip','lat','lon','active_acv'])  
 
 scatterLayer = pdk.Layer(
     'ScatterplotLayer',      
