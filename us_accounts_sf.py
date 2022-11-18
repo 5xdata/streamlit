@@ -55,13 +55,16 @@ city = st.multiselect(
     'Choose the cities that you want to filter'
     ,sorted(set(data['city']))) #.str.lower())))
 
-if state = st.multiselect(
+state = st.multiselect(
     'Choose the states that you want to filter'
     ,sorted(set(data['state'].str.lower())))
-    filtered_data = data.loc[data['state'].str.lower().isin(state)]
-    st.dataframe(filtered_data, use_container_width = True)
-else 
+
+filtered_data = data.loc[data['state'].str.lower().isin(state)]
+if filtered_data == []:
     filtered_data = data
+else
+    st.dataframe(filtered_data, use_container_width = True)
+ 
 #filtered_data = data[data[['city','state']].isin([city,state]).any(axis=1)]
 
 
