@@ -52,7 +52,7 @@ viewState = pdk.ViewState(
 #filtered_data = data[data['active_acv'] == acv_to_filter]
 
 city = st.multiselect(
-    'Choose the cities that you want to filter',
+    'Choose the cities that you want to filter'
     ,data['city'])
 st.write('You selected:', city)
 
