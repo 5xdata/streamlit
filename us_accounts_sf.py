@@ -53,7 +53,7 @@ viewState = pdk.ViewState(
 
 city = st.multiselect(
     'Choose the cities that you want to filter'
-    ,data['city'].str.lower().unique().sort_values())
+    ,data['city'].str.lower().unique().sort())
 st.write('You selected:', city)
 
 scatterLayer = pdk.Layer(
