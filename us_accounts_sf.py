@@ -61,7 +61,7 @@ state = st.multiselect(
 
 filtered_data = data.loc[data['city'].str.lower().isin(city)]
 filtered_data = data.loc[data['state'].str.lower().isin(state)]
-st.dataframe(filtered_data)
+st.dataframe(filtered_data, use_container_width = True)
 
 
 scatterLayer = pdk.Layer(
