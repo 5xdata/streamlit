@@ -38,12 +38,10 @@ st.subheader('Map of all US Accounts of WeVideo with active ACV')
 
 if st.checkbox('Show Filters'):
     st.subheader('Filters for Active ACV, State and City')
-    st.dataframe(data, use_container_width=True)
-
+    
     acv_range = st.radio(
         'Choose the acv range'
         ,('< $500', '$500 - $3k', '$3k - $10k', '> $10k','All Accounts'))
-
 
     if acv_range == '< $500':
         filtered_data = data.loc[(data['active_acv'] > 0) & (data['active_acv'] < 500)]
@@ -62,7 +60,6 @@ if st.checkbox('Show Filters'):
         acv_filter = 'of any value'
 
     filtered_data = pd.DataFrame(filtered_data, columns=['account_name','city','state','zip','lat','lon','active_acv'])   
-
 
     state = st.multiselect(
         'Choose the states that you want to filter'
@@ -95,7 +92,13 @@ if st.checkbox('Show Filters'):
     filtered_data = pd.DataFrame(filtered, columns=['account_name','city','state','zip','lat','lon','active_acv'])  
 
     st.write("Total WeVideo Accounts with Active ACV",acv_filter,", in State(s)",state_filter,"and in City(s)",city_filter,"is (are)",len(filtered_data)) 
+    if st.checkbox('Show Filtered Data'):
+        st.dataframe(filtered_data, use_container_width = True)
+        
+elif st.checkbox('Show Raw Data'):
+    filtered_data = data
     st.dataframe(filtered_data, use_container_width = True)
+    
 else:
     filtered_data = data
     
