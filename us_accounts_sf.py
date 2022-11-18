@@ -77,6 +77,8 @@ else:
     filtered_data = data
 st.dataframe(filtered_data, use_container_width = True)
  
+filtered_data = pd.DataFrame(filtered_data, columns=['account_name','city','state','zip','lat','lon','active_acv'])   
+st.write('ne',filtered_data)    
 state = st.multiselect(
     'Choose the states that you want to filter'
     ,sorted(set(filtered_data['state'].str.lower())))
@@ -84,11 +86,11 @@ state = st.multiselect(
 filtered = filtered_data.loc[filtered_data['state'].str.lower().isin(state)]    
     
 #filtered = filtered_data[filtered_data[['city','state']].isin([city,state]).any(axis=1)]
-st.write('fiiltered_data is',filtered_data)
-st.write('filtered is',filtered)
-st.write('state', sorted(set(filtered_data['state'].str.lower())))
-st.write(filtered_data['state'])
-st.write('lower is',filtered_data['state'].str.lower())
+#st.write('fiiltered_data is',filtered_data)
+#st.write('filtered is',filtered)
+#st.write('state', sorted(set(filtered_data['state'].str.lower())))
+#st.write(filtered_data['state'])
+#st.write('lower is',filtered_data['state'].str.lower())
 
 scatterLayer = pdk.Layer(
     'ScatterplotLayer',      
