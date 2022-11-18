@@ -46,7 +46,7 @@ viewState = pdk.ViewState(
     longitude=-112.8591427000004, latitude=36.365390013524475, zoom=3.50, bearing=0, pitch=0
 )
 
-"""
+
 acv_range = st.radio(
     'Choose the acv range'
     ,('< $500', '$500 - $3k', '$3k - $10k', '> $10k'))
@@ -65,7 +65,7 @@ else:
 
 filtered_data = pd.DataFrame(filtered_data, columns=['account_name','city','state','zip','lat','lon','active_acv'])   
 #st.dataframe(filtered_data, use_container_width = True)
-"""
+
 filtered_data = data
 state = st.multiselect(
     'Choose the states that you want to filter'
