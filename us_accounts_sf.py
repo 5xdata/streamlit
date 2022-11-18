@@ -84,7 +84,8 @@ state = st.multiselect(
 filtered = filtered_data.loc[filtered_data['state'].str.lower().isin(state)]    
     
 #filtered = filtered_data[filtered_data[['city','state']].isin([city,state]).any(axis=1)]
-
+st.write('fiiltered_data is',filtered_data)
+st.write('filtered is',filtered)
 
 scatterLayer = pdk.Layer(
     'ScatterplotLayer',      
