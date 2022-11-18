@@ -60,7 +60,7 @@ state = st.multiselect(
     ,sorted(set(data['state'].str.lower())))
 
 filtered_data = data.loc[data['state'].str.lower().isin(state)]
-if filtered_data == []:
+if filtered_data.empty:
     filtered_data = data
 else:
     st.dataframe(filtered_data, use_container_width = True)
