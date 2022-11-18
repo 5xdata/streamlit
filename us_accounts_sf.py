@@ -62,7 +62,7 @@ state = st.multiselect(
 filtered_data = data.loc[data['state'].str.lower().isin(state)]
 if filtered_data == []:
     filtered_data = data
-else
+else:
     st.dataframe(filtered_data, use_container_width = True)
  
 #filtered_data = data[data[['city','state']].isin([city,state]).any(axis=1)]
