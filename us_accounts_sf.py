@@ -59,8 +59,8 @@ state = st.multiselect(
     'Choose the states that you want to filter'
     ,sorted(set(data['state'].str.lower())))
 
-filtered_data = data.loc[data['city'].str.lower().isin(city)]
-filtered_data = data.loc[data['state'].str.lower().isin(state)]
+filtered_data = data.loc[data['city','state'].str.lower().isin(city,state)]
+#filtered_data = data.loc[data['state'].str.lower().isin(state)]
 st.dataframe(filtered_data, use_container_width = True)
 
 
