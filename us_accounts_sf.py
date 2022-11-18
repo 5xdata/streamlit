@@ -60,6 +60,7 @@ state = st.multiselect(
     ,sorted(set(data['state'].str.lower())))
 
 city_filtered_data = data.loc[data['city'].str.lower().isin(city)]
+city_filtered_data = pd.DataFrame(city_filtered_data)
 filtered_data = city_filtered_data.loc[city_filtered_data['state'].str.lower().isin(state)]
 st.dataframe(filtered_data, use_container_width = True)
 
