@@ -70,7 +70,10 @@ state = st.multiselect(
     ,sorted(set(filtered_data['state'].str.lower())))
 
 filtered_data = pd.DataFrame(filtered_data, columns=['account_name','city','state','zip','lat','lon','active_acv'])  
-filtered_data = filtered_data.loc[filtered_data['state'].str.lower().isin(state)]  
+if filtered_data.empty:
+    filtered_data = data
+else:
+    filtered_data = filtered_data.loc[filtered_data['state'].str.lower().isin(state)]  
  
 
 city = st.multiselect(
@@ -78,7 +81,10 @@ city = st.multiselect(
     ,sorted(set(filtered_data['city'].str.lower())))
 
 filtered_data = pd.DataFrame(filtered_data, columns=['account_name','city','state','zip','lat','lon','active_acv'])   
-filtered_data = filtered_data.loc[filtered_data['city'].str.lower().isin(city)]  
+if filtered_data.empty:
+    filtered_data = data
+else:
+    filtered_data = filtered_data.loc[filtered_data['city'].str.lower().isin(city)]  
 
 
 scatterLayer = pdk.Layer(
