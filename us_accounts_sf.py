@@ -125,7 +125,7 @@ scatterLayer = pdk.Layer(
 
 
 viewState = pdk.ViewState(
-    longitude=-112.8591427000004, latitude=36.365390013524475, zoom=3.50, bearing=0, pitch=0
+    longitude=-96.624305, latitude=41.105315, zoom=3.50, bearing=0, pitch=0
 )
 
 toolTip = {
