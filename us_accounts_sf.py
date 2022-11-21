@@ -47,7 +47,7 @@ if st.checkbox('Show Filters'):
     
     acv_range = st.radio(
         'Choose the acv range'
-        ,('< $500', '$500 - $3k', '$3k - $10k', '> $10k','All Accounts'))
+        ,('All Accounts','< $500', '$500 - $3k', '$3k - $10k', '> $10k'))
 
     if acv_range == '< $500':
         filtered_data = data.loc[(data['active_acv'] > 0) & (data['active_acv'] < 500)]
