@@ -1,9 +1,11 @@
 import pandas as pd
 import streamlit as st
-st.set_page_config(layout = "wide")
 import pydeck as pdk
 import numpy as np
 import snowflake.connector
+
+#Setting wide mode as default
+st.set_page_config(layout = "wide")
 
 # Initialize connection.
 # Uses st.experimental_singleton to only run once.
