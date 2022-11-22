@@ -132,7 +132,7 @@ viewState = pdk.ViewState(
 )
 
 toolTip = {
-    "html": "<b>Account Name (3 charac) - {account_name}</b><br><b>City - {city}</b><br><b>State - {state}</b><br><b>Zip - {zip}</b><br><b>Active ACV - {active_acv}</b>",
+    "html": "<b>Account Name (3 charac) - {account_name}</b><br><b>City - {city}</b><br><b>State - {state}</b><br><b>Zip - {zip}</b><br><b>Active ACV - ${active_acv}</b>",
     "style": {"background": "grey", "color": "white", "font-family": '"Helvetica Neue", Arial', "z-index": "10000", "max-width": "30%"},
 }
 
